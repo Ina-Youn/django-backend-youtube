@@ -8,7 +8,7 @@ class UserTestCase(TestCase):
 
     # 일반 유저 생성 테스트
     def test_create_user(self):
-        email = 'yia0816@gmail.com'
+        email = 'yia@gmail.com'
         password = 'password123'
 
         user = get_user_model().objects.create_user(email=email, password=password)
@@ -18,7 +18,7 @@ class UserTestCase(TestCase):
         # self.assertEqual(user.check_password,(password), True)
         self.assertTrue(user.check_password(password))
         # self.assertEqual(user.is_superuser, False)
-        self.assertFalse(user.is_supersuer)
+        self.assertFalse(user.is_superuser)
 
 
     # 슈퍼 유저 생성 테스트
@@ -26,11 +26,11 @@ class UserTestCase(TestCase):
         email = 'yia_super@gmail.com'
         password = 'password123'
 
-        user = get_user_model().objects.create_supersuer(
+        user = get_user_model().objects.create_superuser(
             email=email,
             password=password
         )
 
         # 슈퍼유저
         self.assertTrue(user.is_superuser)
-        self.assertTrue(user.is_sraff)
+        self.assertTrue(user.is_staff)

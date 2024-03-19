@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
-    BaseUserManager
+    BaseUserManager,
 )
 
 class UserManager(BaseUserManager):
@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     nickname = models.CharField(max_length=255)
     is_bussiness = models.BooleanField(default=False) # BooleanField는 default 값 필요
 
-    # permissionMixin: 권한 관리
+    # permissionsMixin: 권한 관리
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
