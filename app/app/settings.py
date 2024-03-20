@@ -37,13 +37,14 @@ DJANGO_SYSTEM_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
 ]
 
 CUSTOM_USER_APPS = [
-    'users.apps.UsersConfig',
+    'users.apps.UsersConfig', # Config: label 변경할 일이 많다.
+    'videos.apps.VideosConfig',
     'rest_framework',
-    'drf_spectacular',
+    'drf_spectacular'
 ]
 
 INSTALLED_APPS = CUSTOM_USER_APPS + DJANGO_SYSTEM_APPS

@@ -6,8 +6,8 @@ version: "3.11"
 
 # docker-compose: 프론트엔드, 백엔드, DB, NginX
 services:
-# 첫 번째 컨테이너
-  app: # Django
+  # 첫 번째 컨테이너: Django
+  app:
     build:
       context: .
       args:
@@ -20,21 +20,21 @@ services:
       sh -c 'python manage.py wait_for_db &&
             python manage.py migrate &&
             python manage.py runserver 0.0.0.0:8000'
-    environment: # 아래의 변수들은 .env 파일에 저장하지 않습니다.
+    environment: # 아래의 변수들은 .env 파일에 저장 (.env) commit 하지 않습니다.
       - DB_HOST=db
-      - DB-NAME=youtube
+      - DB_NAME=youtube
       - DB_USER=ina
-      - DB_PASS=ina0816
-    depends_on: # db 컨테이너 실행 => app 컨테이너 실행
+      - DB_PASS=1234
+    depends_on: # db 컨테이너 실행 -> app 컨테이너 실행
       - db
 
-  # 두 번째 컨테이너: Postgres
+  # 두 번째 컨테이너: Portgres
   db:
     image: postgres:16-alpine
-    # 데이터 저장 공간(./data/db) => (마운트) => /var/lib/postgrespl/data
+    # 데이터 저장 공간(./data/db) => (마운트) => /var/lib/postgresql/data
     # docker-compose down
-    # 아래의 설정을 통해서 컨테이너가 제거되어도 데이터가 보존 됨 -> 로컬 호스트환경에 저장했기 때문!
-    volumes: # 데이터 저장 공간
+    # 아래의 설정을 통해서 컨테이너가 제거되어도 데이터가 보존된다. 왜? 호스트환경에 저장했기 때문에
+    volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=youtube
